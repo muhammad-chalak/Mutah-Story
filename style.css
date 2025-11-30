@@ -1,0 +1,130 @@
+/* --- Global Reset & Vars --- */
+:root {
+    --bg-deep: #050505;
+    --gold: #cfaa6e;
+    --gold-glow: rgba(207, 170, 110, 0.4);
+    --blood-red: #8a1c1c;
+    --text-white: #e6e6e6;
+    --text-grey: #a1a1aa;
+    --font-main: 'IBM Plex Sans Arabic', sans-serif;
+    --font-display: 'Reem Kufi', sans-serif;
+    --font-quran: 'Amiri Quran', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: var(--bg-deep); color: var(--text-white); font-family: var(--font-main); direction: rtl; line-height: 2; overflow-x: hidden; }
+
+/* Backgrounds */
+.noise-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.04; background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiLz48L3N2Zz4'); pointer-events: none; z-index: 90; }
+.ambient-light { position: fixed; top: -10%; left: -10%; width: 60%; height: 60%; background: radial-gradient(circle, var(--gold-glow), transparent 70%); filter: blur(120px); z-index: -1; opacity: 0.6; }
+
+/* Nav */
+.glass-nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1100px; background: rgba(15,15,20,0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 50px; padding: 12px 30px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.nav-content { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: #fff; } .logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 25px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--text-grey); font-size: 0.9rem; transition: 0.3s; }
+.nav-links a:hover, .highlight-link { color: var(--gold); }
+
+/* Hero */
+.hero-section { height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; margin-bottom: 50px; }
+.eyebrow { color: var(--gold); letter-spacing: 3px; font-size: 0.9rem; display: block; margin-bottom: 15px; text-transform: uppercase; }
+.glitch-text { font-family: var(--font-display); font-size: clamp(3.5rem, 9vw, 7rem); color: #fff; text-shadow: 0 0 40px rgba(207,170,110,0.2); margin-bottom: 20px; line-height: 1.1; }
+.hero-desc { font-size: 1.2rem; color: var(--text-grey); max-width: 600px; margin: 0 auto; }
+.scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); color: var(--text-grey); font-size: 0.8rem; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.line { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold), transparent); }
+
+/* Timeline Section */
+.timeline-section { padding: 50px 0; }
+.section-title { text-align: center; font-family: var(--font-display); font-size: 2.5rem; color: var(--gold); margin-bottom: 80px; position: relative; }
+.section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--gold); margin: 15px auto 0; opacity: 0.5; }
+
+.timeline-container { position: relative; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.timeline-line { position: absolute; top: 0; bottom: 0; right: 50%; width: 2px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); transform: translateX(50%); opacity: 0.3; }
+
+.timeline-block { position: relative; margin-bottom: 60px; display: flex; justify-content: center; width: 100%; }
+.timeline-block:nth-child(odd) { justify-content: flex-start; }
+.timeline-block:nth-child(even) { justify-content: flex-end; }
+
+/* Timeline Content Card */
+.timeline-content {
+    width: 45%;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 30px;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.timeline-content:hover {
+    border-color: rgba(207, 170, 110, 0.4);
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.timeline-content h3 { font-size: 1.5rem; color: #fff; margin-bottom: 15px; font-family: var(--font-display); }
+.timeline-content p { color: #d1d5db; font-size: 1rem; text-align: justify; margin-bottom: 0; }
+.date-badge { display: inline-block; background: rgba(207,170,110,0.15); color: var(--gold); padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; margin-bottom: 15px; border: 1px solid rgba(207,170,110,0.2); }
+
+/* Marker */
+.marker { position: absolute; right: 50%; transform: translateX(50%); width: 45px; height: 45px; background: var(--bg-deep); border: 2px solid var(--gold); border-radius: 50%; color: var(--gold); display: flex; align-items: center; justify-content: center; z-index: 10; font-weight: bold; font-family: var(--font-display); font-size: 1.2rem; box-shadow: 0 0 20px rgba(207,170,110,0.2); }
+
+/* Spacing fix for timeline */
+.timeline-block:nth-child(odd) .timeline-content { margin-right: 60px; text-align: right; }
+.timeline-block:nth-child(even) .timeline-content { margin-left: 60px; text-align: right; }
+
+/* Clarification Section */
+.clarification-section { padding: 100px 0; background: linear-gradient(to top, var(--bg-deep), #0c0c10); position: relative; }
+.section-intro { text-align: center; max-width: 800px; margin: 0 auto 60px; color: var(--text-grey); font-size: 1.1rem; line-height: 1.8; }
+
+.evidence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+
+.evidence-card {
+    background: rgba(30,30,35,0.4);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 40px;
+    border-radius: 16px;
+    transition: 0.3s;
+}
+.evidence-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+
+.evidence-card h3 { font-size: 1.4rem; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.card-icon { font-size: 1.8rem; }
+
+.verse-box, .hadith-box {
+    background: rgba(0,0,0,0.3);
+    padding: 25px;
+    border-radius: 10px;
+    border-right: 4px solid var(--gold);
+    margin-bottom: 20px;
+}
+
+.quran-text { font-family: var(--font-quran); font-size: 1.6rem; color: #fff; line-height: 2.4; text-align: center; }
+.hadith-text { font-weight: bold; font-size: 1.1rem; color: #fff; text-align: center; }
+.surah-ref { display: block; text-align: left; font-size: 0.8rem; color: var(--text-grey); margin-top: 10px; }
+
+.explanation p { color: #ccc; margin-bottom: 10px; }
+.explanation ul { margin-right: 20px; color: #bbb; }
+.explanation li { margin-bottom: 8px; }
+
+/* Footer */
+.main-footer { padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: var(--text-grey); font-size: 0.9rem; }
+.credits p { margin-bottom: 10px; }
+
+/* Animations */
+.reveal { opacity: 0; transform: translateY(40px); transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* Mobile */
+@media (max-width: 768px) {
+    .timeline-line { right: 20px; transform: none; }
+    .marker { right: 0; transform: none; width: 40px; height: 40px; font-size: 1rem; }
+    .timeline-block { justify-content: flex-start !important; }
+    .timeline-content { width: 100%; margin: 0 50px 0 0 !important; padding: 20px; }
+    .glitch-text { font-size: 3rem; }
+    .nav-links { display: none; }
+    .evidence-grid { grid-template-columns: 1fr; }
+}
