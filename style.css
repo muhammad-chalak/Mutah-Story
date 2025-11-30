@@ -1,4 +1,4 @@
-/* --- Global Reset & Vars --- */
+/* --- Global Reset & Variables --- */
 :root {
     --bg-deep: #050505;
     --gold: #cfaa6e;
@@ -6,41 +6,133 @@
     --blood-red: #8a1c1c;
     --text-white: #e6e6e6;
     --text-grey: #a1a1aa;
+    
+    /* Fonts */
     --font-main: 'IBM Plex Sans Arabic', sans-serif;
     --font-display: 'Reem Kufi', sans-serif;
     --font-quran: 'Amiri Quran', serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: var(--bg-deep); color: var(--text-white); font-family: var(--font-main); direction: rtl; line-height: 2; overflow-x: hidden; }
 
-/* Backgrounds */
-.noise-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.04; background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiLz48L3N2Zz4'); pointer-events: none; z-index: 90; }
-.ambient-light { position: fixed; top: -10%; left: -10%; width: 60%; height: 60%; background: radial-gradient(circle, var(--gold-glow), transparent 70%); filter: blur(120px); z-index: -1; opacity: 0.6; }
+body { 
+    background-color: var(--bg-deep); 
+    color: var(--text-white); 
+    font-family: var(--font-main); 
+    direction: rtl; 
+    line-height: 2; 
+    overflow-x: hidden; 
+}
 
-/* Nav */
-.glass-nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1100px; background: rgba(15,15,20,0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 50px; padding: 12px 30px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+/* --- Background Texture & Effects --- */
+.noise-overlay { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    opacity: 0.04; 
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiLz48L3N2Zz4'); 
+    pointer-events: none; 
+    z-index: 90; 
+}
+
+.ambient-light { 
+    position: fixed; top: -10%; left: -10%; width: 60%; height: 60%; 
+    background: radial-gradient(circle, var(--gold-glow), transparent 70%); 
+    filter: blur(120px); 
+    z-index: -1; 
+    opacity: 0.6; 
+}
+
+/* --- Navigation --- */
+.glass-nav { 
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
+    width: 95%; max-width: 1100px; 
+    background: rgba(15,15,20,0.8); 
+    backdrop-filter: blur(20px); 
+    border: 1px solid rgba(255,255,255,0.08); 
+    border-radius: 50px; 
+    padding: 12px 30px; 
+    z-index: 1000; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+}
+
 .nav-content { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: #fff; } .logo span { color: var(--gold); }
+.logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: #fff; } 
+.logo span { color: var(--gold); }
+
 .nav-links { display: flex; gap: 25px; list-style: none; }
 .nav-links a { text-decoration: none; color: var(--text-grey); font-size: 0.9rem; transition: 0.3s; }
 .nav-links a:hover, .highlight-link { color: var(--gold); }
 
-/* Hero */
-.hero-section { height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; margin-bottom: 50px; }
+/* --- Hero Section --- */
+.hero-section { 
+    height: 90vh; 
+    display: flex; align-items: center; justify-content: center; 
+    text-align: center; 
+    position: relative; 
+    margin-bottom: 50px; 
+    overflow: hidden; /* Prevents overflow during animation */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    /* PERFORMANCE FIX: Hints browser to optimize for movement */
+    will-change: transform, opacity; 
+}
+
 .eyebrow { color: var(--gold); letter-spacing: 3px; font-size: 0.9rem; display: block; margin-bottom: 15px; text-transform: uppercase; }
-.glitch-text { font-family: var(--font-display); font-size: clamp(3.5rem, 9vw, 7rem); color: #fff; text-shadow: 0 0 40px rgba(207,170,110,0.2); margin-bottom: 20px; line-height: 1.1; }
+
+.glitch-text { 
+    font-family: var(--font-display); 
+    font-size: clamp(3.5rem, 9vw, 7rem); 
+    color: #fff; 
+    text-shadow: 0 0 40px rgba(207,170,110,0.2); 
+    margin-bottom: 20px; 
+    line-height: 1.1; 
+}
+
 .hero-desc { font-size: 1.2rem; color: var(--text-grey); max-width: 600px; margin: 0 auto; }
-.scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); color: var(--text-grey); font-size: 0.8rem; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+/* Scroll Indicator (Updated as Button/Link) */
+.scroll-indicator { 
+    position: absolute; 
+    bottom: 40px; left: 50%; 
+    transform: translateX(-50%); 
+    color: var(--text-grey); 
+    font-size: 0.8rem; 
+    display: flex; flex-direction: column; align-items: center; gap: 10px; 
+    text-decoration: none; /* Removes underline since it is an <a> tag now */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.scroll-indicator:hover {
+    color: var(--gold);
+    transform: translateX(-50%) translateY(5px);
+}
+
 .line { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold), transparent); }
 
-/* Timeline Section */
+/* --- Timeline Section (20 Cards) --- */
 .timeline-section { padding: 50px 0; }
-.section-title { text-align: center; font-family: var(--font-display); font-size: 2.5rem; color: var(--gold); margin-bottom: 80px; position: relative; }
+.section-title { 
+    text-align: center; 
+    font-family: var(--font-display); 
+    font-size: 2.5rem; 
+    color: var(--gold); 
+    margin-bottom: 80px; 
+    position: relative; 
+}
 .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--gold); margin: 15px auto 0; opacity: 0.5; }
 
 .timeline-container { position: relative; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-.timeline-line { position: absolute; top: 0; bottom: 0; right: 50%; width: 2px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); transform: translateX(50%); opacity: 0.3; }
+.timeline-line { 
+    position: absolute; top: 0; bottom: 0; right: 50%; 
+    width: 2px; 
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent); 
+    transform: translateX(50%); 
+    opacity: 0.3; 
+}
 
 .timeline-block { position: relative; margin-bottom: 60px; display: flex; justify-content: center; width: 100%; }
 .timeline-block:nth-child(odd) { justify-content: flex-start; }
@@ -70,13 +162,50 @@ body { background-color: var(--bg-deep); color: var(--text-white); font-family: 
 .date-badge { display: inline-block; background: rgba(207,170,110,0.15); color: var(--gold); padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; margin-bottom: 15px; border: 1px solid rgba(207,170,110,0.2); }
 
 /* Marker */
-.marker { position: absolute; right: 50%; transform: translateX(50%); width: 45px; height: 45px; background: var(--bg-deep); border: 2px solid var(--gold); border-radius: 50%; color: var(--gold); display: flex; align-items: center; justify-content: center; z-index: 10; font-weight: bold; font-family: var(--font-display); font-size: 1.2rem; box-shadow: 0 0 20px rgba(207,170,110,0.2); }
+.marker { 
+    position: absolute; right: 50%; transform: translateX(50%); 
+    width: 45px; height: 45px; 
+    background: var(--bg-deep); 
+    border: 2px solid var(--gold); 
+    border-radius: 50%; 
+    color: var(--gold); 
+    display: flex; align-items: center; justify-content: center; 
+    z-index: 10; 
+    font-weight: bold; font-family: var(--font-display); font-size: 1.2rem; 
+    box-shadow: 0 0 20px rgba(207,170,110,0.2); 
+}
 
 /* Spacing fix for timeline */
 .timeline-block:nth-child(odd) .timeline-content { margin-right: 60px; text-align: right; }
 .timeline-block:nth-child(even) .timeline-content { margin-left: 60px; text-align: right; }
 
-/* Clarification Section */
+/* --- Khalid Spotlight --- */
+.khalid-section { 
+    position: relative; padding: 100px 0; min-height: 70vh; 
+    background: url('https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=2069') center/cover fixed; 
+    display: flex; align-items: center; 
+}
+.overlay-gradient { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    background: linear-gradient(to right, #050505 30%, rgba(5,5,5,0.7)); 
+}
+.khalid-content { position: relative; z-index: 2; width: 100%; }
+.content-wrapper { max-width: 600px; }
+.giant-name { 
+    font-family: var(--font-display); font-size: 4rem; 
+    background: linear-gradient(45deg, #fff, var(--gold)); 
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+}
+.subtitle { font-size: 1.5rem; color: #fff; margin-bottom: 20px; }
+.stat-box { 
+    border: 1px solid var(--gold); padding: 15px; border-radius: 10px; 
+    display: inline-flex; flex-direction: column; align-items: center; 
+    width: 120px; background: rgba(0,0,0,0.5); margin-bottom: 20px; 
+}
+.stat-box strong { font-size: 2rem; color: var(--gold); font-family: var(--font-display); }
+.khalid-story { font-size: 1.1rem; border-right: 4px solid var(--gold); padding-right: 20px; color: #ddd; }
+
+/* --- Clarification Section (Shubha) --- */
 .clarification-section { padding: 100px 0; background: linear-gradient(to top, var(--bg-deep), #0c0c10); position: relative; }
 .section-intro { text-align: center; max-width: 800px; margin: 0 auto 60px; color: var(--text-grey); font-size: 1.1rem; line-height: 1.8; }
 
@@ -110,15 +239,15 @@ body { background-color: var(--bg-deep); color: var(--text-white); font-family: 
 .explanation ul { margin-right: 20px; color: #bbb; }
 .explanation li { margin-bottom: 8px; }
 
-/* Footer */
+/* --- Footer --- */
 .main-footer { padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: var(--text-grey); font-size: 0.9rem; }
 .credits p { margin-bottom: 10px; }
 
-/* Animations */
+/* --- Animations --- */
 .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* Mobile */
+/* --- Mobile Responsive --- */
 @media (max-width: 768px) {
     .timeline-line { right: 20px; transform: none; }
     .marker { right: 0; transform: none; width: 40px; height: 40px; font-size: 1rem; }
@@ -127,4 +256,5 @@ body { background-color: var(--bg-deep); color: var(--text-white); font-family: 
     .glitch-text { font-size: 3rem; }
     .nav-links { display: none; }
     .evidence-grid { grid-template-columns: 1fr; }
+    .hero-section { height: 85vh; }
 }
